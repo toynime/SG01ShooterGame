@@ -1,31 +1,29 @@
+using System;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class IdleState : MonoBehaviour
 {
-    public Blue blue;
-
-    void Start()
-    {
-        if (blue.animator != null)
-            blue.animator.Play("IdleAnimation");
-        else
-            Debug.LogError("Animator not assigned to Blue script in IdleState!");
-    }
-
+    [FormerlySerializedAs("blue")] public Enemy enemy;
+    private bool isNear=false;
+    [SerializeField] private float _attackDistance = 5f;
+    [SerializeField] private float _followDistance = 8.0f;
     void Update()
     {
-        if (blue.playerTransform == null)
-        {
-            Debug.LogWarning("Player Transform not assigned to Blue script in IdleState!");
-            return;
-        }
+        float distance = Vector3.Distance(enemy.transform.position, enemy.playerTransform.position);
+        if (distance < _followDistance) isNear = true;
+        if (!isNear) return;
+        enemy.StartWalking();
+        enemy.animator.SetBool("Attack", distance <= _attackDistance);
 
-        float distance = Vector3.Distance(blue.transform.position, blue.playerTransform.position);
-
-        if (distance < 5.0f) // Adjust the detection range as needed
-        {
-            blue.StartWalking();
-        }
     }
+
+    public void StartIdling()
+    {
+        enemy = GetComponent<Enemy>();
+        enemy.animator.SetBool("isPatrolling", false);
+
+    }
+    
 }
 

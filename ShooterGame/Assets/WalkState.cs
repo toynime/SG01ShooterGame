@@ -1,37 +1,23 @@
+using System;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class WalkState : MonoBehaviour
 {
-    public Blue blue;
-    public float speed = 2.0f;
-
-    void Start()
-    {
-        if (blue.animator != null)
-            blue.animator.Play("WalkAnimation");
-        else
-            Debug.LogError("Animator not assigned to Blue script in WalkState!");
+    [FormerlySerializedAs("blue")] public Enemy enemy;
+    
+    public void StartWalking()
+    { 
+        enemy = GetComponent<Enemy>();
+        enemy.animator.SetBool("isPatrolling", true);
+        Vector3 direction = (enemy.playerTransform.position - enemy.transform.position).normalized;
+        enemy.transform.position += direction * enemy.speed * Time.deltaTime;
+        enemy.transform.LookAt(enemy.playerTransform);
     }
 
-    void Update()
+    private void OnDisable()
     {
-        if (blue.playerTransform == null)
-        {
-            Debug.LogWarning("Player Transform not assigned to Blue script in WalkState!");
-            return;
-        }
-
-        float distance = Vector3.Distance(blue.transform.position, blue.playerTransform.position);
-
-        if (distance < 5.0f)
-        {
-            Vector3 direction = (blue.playerTransform.position - blue.transform.position).normalized;
-            blue.transform.position += direction * speed * Time.deltaTime;
-        }
-        else
-        {
-            blue.StartIdling();
-        }
+        enemy.animator.SetBool("isPatrolling", false);
     }
 }
 
