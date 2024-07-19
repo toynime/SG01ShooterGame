@@ -4386,12 +4386,41 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 538810957}
   playerTransform: {fileID: 0}
+  speed: 2
+  maxHealth: 10
 --- !u!95 &538810957 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 9587272, guid: edd34a89cfe571f4ca766dcca2459bbe,
     type: 3}
   m_PrefabInstance: {fileID: 1221095221}
   m_PrefabAsset: {fileID: 0}
+--- !u!136 &538810959
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 538810953}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 1.1038501
+  m_Height: 10.03989
+  m_Direction: 2
+  m_Center: {x: -0.00000029642442, y: 2.02, z: -1.0318749}
+--- !u!65 &538810960
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 538810953}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.4809477, y: 4.842675, z: 4.2297974}
+  m_Center: {x: 0.031296786, y: 1.9213269, z: -0.49893683}
 --- !u!4 &547507473 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7610868675822231441, guid: e85142d1c78f896448e46cbaebcccc58,
@@ -11592,6 +11621,10 @@ PrefabInstance:
     - target: {fileID: 193776, guid: edd34a89cfe571f4ca766dcca2459bbe, type: 3}
       propertyPath: m_Name
       value: Blue
+      objectReference: {fileID: 0}
+    - target: {fileID: 193776, guid: edd34a89cfe571f4ca766dcca2459bbe, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
       objectReference: {fileID: 0}
     - target: {fileID: 441462, guid: edd34a89cfe571f4ca766dcca2459bbe, type: 3}
       propertyPath: m_RootOrder

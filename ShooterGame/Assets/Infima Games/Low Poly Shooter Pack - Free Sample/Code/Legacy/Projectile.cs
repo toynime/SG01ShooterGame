@@ -36,6 +36,11 @@ public class Projectile : MonoBehaviour {
 	//If the bullet collides with anything
 	private void OnCollisionEnter (Collision collision)
 	{
+		if(collision.gameObject.CompareTag("Enemy"))
+		{
+			Enemy enemy = collision.gameObject.GetComponent<Enemy>();
+			enemy.TakeDamage(2);
+		}
 		//Ignore collisions with other projectiles.
 		if (collision.gameObject.GetComponent<Projectile>() != null)
 			return;
